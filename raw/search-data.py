@@ -10,15 +10,15 @@ def func(number:int):
 
 def htmlParser(string:str):
     soup=BeautifulSoup(string,"html.parser")
-    text=soup.text
+    text=soup.get_text("\u200b \u200b",True)
     link=soup.find_all("a")
     image=soup.find_all("img")
-    if " " in text:
+    """if " " in text:
         text=text.replace(" ","-")
     if "  " in text:
         text=text.replace("  ","-")
     if "\n" in text:
-        text=text.replace("\n","-")
+        text=text.replace("\n","-")"""
     linkList=[]
     for l in link:
         if "https://accounts.google.com" in l.get("href"):
@@ -39,4 +39,7 @@ def htmlParser(string:str):
 
 html=func(-1)
 data=htmlParser(html)
-print(data)
+yo=data["text"].split("\u200b \u200b")
+print(yo[3])
+print(len(yo))
+#13, the description is of yo[3], the 4th position
